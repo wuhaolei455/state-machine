@@ -8,9 +8,9 @@ type NestedKeys<T> = {
   [K in keyof T]: T[K] extends object ? K | NestedKeys<T[K]> : K;
 }[keyof T];
 
-type MyExclude<T, U> = T extends U ? T : never;
+type MyExclude<T, U> = T extends U ? never : T;
 
-export type Actions<T> = MyExclude<NestedKeys<Config>, keyof T>;
+export type Actions<T> = MyExclude<NestedKeys<T>, keyof T>;
 
 export type Options<T> = {
   initialState: keyof T & string;

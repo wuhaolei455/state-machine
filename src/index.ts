@@ -44,7 +44,7 @@ export function createMachine<T extends Config>(config: T, options: Options<T>) 
   async function transition(action: Actions<T>, meta?: unknown) {
     await emitter.emit(EventTypes.ON_EXIT, { action, current, meta})
     const last = current;
-    const currentAction = config[current][action];
+    const currentAction = (config[current] as Record<string, any>)[action as string];
     if (!currentAction) {
       return;
     }
