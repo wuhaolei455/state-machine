@@ -5,7 +5,6 @@ export function createMachine<T extends Config>(config: T, options: Options<T>) 
   const { initialState, emitter = createEventEmitter<Events<T>>() } = options;
   const stateEmitter = createEventEmitter<StateEvents<T>>();
   const handlers = buildHandlers(config, stateEmitter);
-  const actions = buildActions(config, transition)
 
   let current = initialState;
 
@@ -48,7 +47,11 @@ export function createMachine<T extends Config>(config: T, options: Options<T>) 
     if (!currentAction) {
       return;
     }
-    current = await currentAction(meta);
+    const result = await currentAction(meta);
+    // 如果返回 void，保持当前状态不变
+    if (result !== undefined && result !== null) {
+      current = result as keyof T & string;
+    }
     await emitter.emit(EventTypes.ON_ENTER, { action, current, last, meta});
     await stateEmitter.emit(current, {
       action,
@@ -59,20 +62,22 @@ export function createMachine<T extends Config>(config: T, options: Options<T>) 
     return current;
   }
 
+  const actions = buildActions(config, transition)
+
   function buildActions<T extends Config>(config: T, transition: Transition<T>) {
-    const actionSet = Object.values(config).reduce((acc, curr) => {
+    const actionSet = Object.values(config).reduce((acc: Set<Actions<T>>, curr) => {
       Object.keys(curr).forEach(key => {
         acc.add(key as Actions<T>);
       });
       return acc;
     }, new Set<Actions<T>>())
 
-    return Array.from(actionSet).reduce((acc, action) => {
+    return Array.from(actionSet).reduce((acc: Record<Actions<T>, (meta?: unknown) => Promise<(keyof T & string) | undefined>>, action: Actions<T>) => {
       acc[action] = function doTransition(meta?: unknown) {
         return transition(action, meta);
       }
       return acc;
-    }, {} as Record<Actions<T>, (meta?: unknown) => Promise<string | undefined>>);
+    }, {} as Record<Actions<T>, (meta?: unknown) => Promise<(keyof T & string) | undefined>>);
   }
 
   function buildHandlers<T extends Config>(

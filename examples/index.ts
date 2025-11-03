@@ -2,7 +2,9 @@ import { createMachine } from "../dist/index";
 
 const lightSwitch = {
   off: {
-    switchOn: () => "on",
+    switchOn: () => {
+
+    },
     switchOnAsync: async () => {
       // 模拟异步操作
       await new Promise((resolve) => setTimeout(resolve, 100));
