@@ -27,7 +27,7 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && rollup -c",
+    "build": "npm run clean && rollup -c && node scripts/generate-esm-types.js",
     "dev": "tsc -w",
     "test": "jest",
     "prepublishOnly": "npm run build && npm run test",

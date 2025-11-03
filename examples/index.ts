@@ -1,4 +1,4 @@
-import { createMachine } from "../dist/index";
+import { createMachine } from "../dist/index.esm.js";
 
 const lightSwitch = {
   off: {
