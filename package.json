@@ -1,6 +1,6 @@
 {
   "name": "holly-fsm",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "holly-fsm SDK",
   "license": "MIT",
   "author": "holly",
@@ -8,7 +8,9 @@
     "type": "git",
     "url": "https://github.com/hollywood/holly-fsm"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -25,7 +27,7 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && rollup -c",
+    "build": "npm run clean && rollup -c && node scripts/generate-esm-types.js",
     "dev": "tsc -w",
     "test": "jest",
     "prepublishOnly": "npm run build && npm run test",
@@ -38,6 +40,9 @@
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major"
+  },
+  "dependencies": {
+    "holly-emitter": "^1.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -56,4 +61,3 @@
     "node": ">=16.0.0"
   }
 }
-
