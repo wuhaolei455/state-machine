@@ -1,0 +1,153 @@
+/* React状态机示例样式 */
+
+.task-manager {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 500px;
+  background: #f9f9f9;
+}
+
+.state-indicator {
+  margin-bottom: 20px;
+}
+
+.state-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  position: relative;
+}
+
+.state-idle {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.state-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.state-inProgress {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.state-completed {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.state-failed {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.loading {
+  margin-left: 8px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.state-content {
+  margin-bottom: 20px;
+}
+
+.state-content h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.state-content p {
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.state-content button {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.state-content button:hover:not(:disabled) {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.state-content button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.state-info {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #666;
+}
+
+.state-info p {
+  margin: 4px 0;
+}
+
+.light-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  max-width: 200px;
+  background: #f9f9f9;
+}
+
+.light {
+  font-size: 64px;
+  transition: transform 0.3s;
+}
+
+.light.on {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.8));
+  }
+}
+
+.light-switch button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.light-switch button:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.light-switch button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
